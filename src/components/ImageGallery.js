@@ -15,7 +15,7 @@ import Thumbnail from './Thumbnail';
 
 const BATCH_SIZE = 28;
 const NUM_COLUMNS = 4;
-const THUMBNAIL_WIDTH = Dimensions.get('window').width / NUM_COLUMNS - 10;
+const THUMBNAIL_WIDTH = Dimensions.get('window').width / NUM_COLUMNS - 6;
 
 class ImageGallery extends React.Component {
   constructor(props) {
@@ -71,15 +71,23 @@ class ImageGallery extends React.Component {
     });
   };
 
-  renderItem = ({ item }) => (
-    <View style={{ paddingTop: 8, paddingLeft: 8 }}>
-      <Thumbnail
-        url={item.urls.thumb}
-        backgroundColor={item.color}
-        width={THUMBNAIL_WIDTH}
-      />
-    </View>
-  )
+  renderItem = ({ item, index }) => {
+    const columnIndex = index % 4;
+
+    return (
+      <View
+        style={{
+          paddingLeft: columnIndex > 0 ? 8 : 0,
+        }}
+      >
+        <Thumbnail
+          url={item.urls.thumb}
+          backgroundColor={item.color}
+          width={THUMBNAIL_WIDTH}
+        />
+      </View>
+    );
+  }
 
   renderFooter = () => {
     const { isLoading } = this.state;
@@ -136,6 +144,7 @@ class ImageGallery extends React.Component {
             tintColor={color.blue}
           />
         )}
+        columnWrapperStyle={{ marginBottom: 8 }}
         onEndReached={this.handleLoadMore}
         onEndReachedThreshold={2}
         ListFooterComponent={this.renderFooter}
