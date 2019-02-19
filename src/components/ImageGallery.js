@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import {
   FlatList,
   ActivityIndicator,
@@ -109,7 +108,6 @@ class ImageGallery extends React.Component {
 
   render() {
     const { error, isRefreshing } = this.state;
-    const { getRef } = this.props;
 
     if (error) {
       return (
@@ -128,7 +126,6 @@ class ImageGallery extends React.Component {
 
     return (
       <FlatList
-        ref={getRef}
         data={this.dataArray}
         renderItem={this.renderItem}
         keyExtractor={(item) => item.id}
@@ -153,13 +150,5 @@ class ImageGallery extends React.Component {
     );
   }
 }
-
-ImageGallery.propTypes = {
-  getRef: PropTypes.func,
-};
-
-ImageGallery.defaultProps = {
-  getRef: () => null,
-};
 
 export default ImageGallery;

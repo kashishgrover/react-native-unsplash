@@ -9,7 +9,7 @@ class PhotosScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <ImageGallery getRef={(ref) => { this.imageGalleryRef = ref; }} />
+        <ImageGallery />
       </View>
     );
   }
