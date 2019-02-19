@@ -4,15 +4,14 @@ import { withNavigation } from 'react-navigation';
 import { TouchableHighlight } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import color from '../../theme/color';
-import ThumbnailConfig from './Thumbnail.config';
 
 class Thumbnail extends React.PureComponent {
   render() {
-    const { navigation, url } = this.props;
+    const { navigation, url, width } = this.props;
 
     return (
       <TouchableHighlight
-        style={{ width: ThumbnailConfig.width, height: ThumbnailConfig.width }}
+        style={{ width, height: width }}
         onPress={() => navigation.navigate('SinglePhotoScreen')}
         underlayColor={color.redDark}
       >
@@ -28,6 +27,7 @@ class Thumbnail extends React.PureComponent {
 Thumbnail.propTypes = {
   navigation: PropTypes.object.isRequired,
   url: PropTypes.string.isRequired,
+  width: PropTypes.number.isRequired,
 };
 
 export default withNavigation(Thumbnail);

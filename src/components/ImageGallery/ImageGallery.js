@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {
   FlatList,
   ActivityIndicator,
@@ -6,22 +7,29 @@ import {
   Text,
   Button,
   RefreshControl,
+  Dimensions,
 } from 'react-native';
 import config from '../../config';
 import color from '../../theme/color';
 import Thumbnail from '../Thumbnail/Thumbnail';
-import ThumbnailConfig from '../Thumbnail/Thumbnail.config';
 
-const PAGE_SIZE = 30;
+const BATCH_SIZE = 28;
+const NUM_COLUMNS = 4;
+const THUMBNAIL_WIDTH = Dimensions.get('window').width / NUM_COLUMNS - 10;
 
 class ImageGallery extends React.Component {
-  state = {
-    isLoading: false,
-    data: [],
-    page: 1,
-    error: null,
-    isRefreshing: false,
-  };
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      isLoading: false,
+      page: 1,
+      error: null,
+      isRefreshing: false,
+    };
+
+    this.dataArray = [];
+  }
 
   componentDidMount() {
     this.makeRemoteRequest();
@@ -29,17 +37,15 @@ class ImageGallery extends React.Component {
 
   makeRemoteRequest = async () => {
     const { page } = this.state;
-    const url = `${config.baseUrl}?page=${page}&per_page=${PAGE_SIZE}`;
+    const url = `${config.baseUrl}?page=${page}&per_page=${BATCH_SIZE}`;
 
     this.setState({ isLoading: true });
 
     try {
-      const { data: existingData } = this.state;
       const res = await fetch(url);
       const data = await res.json();
-
+      this.dataArray = page === 1 ? data : [...this.dataArray, ...data];
       this.setState({
-        data: page === 1 ? data : [...existingData, ...data],
         error: data.error || null,
         isLoading: false,
         isRefreshing: false,
@@ -59,14 +65,21 @@ class ImageGallery extends React.Component {
     });
   };
 
-    handleRefresh = () => {
-      this.setState({
-        page: 1,
-        isRefreshing: true,
-      }, () => {
-        this.makeRemoteRequest();
-      });
-    };
+  handleRefresh = () => {
+    this.setState({ page: 1, isRefreshing: true }, () => {
+      this.makeRemoteRequest();
+    });
+  };
+
+  renderItem = ({ item }) => (
+    <View style={{ paddingTop: 8, paddingLeft: 8 }}>
+      <Thumbnail
+        url={item.urls.thumb}
+        backgroundColor={item.color}
+        width={THUMBNAIL_WIDTH}
+      />
+    </View>
+  )
 
   renderFooter = () => {
     const { isLoading } = this.state;
@@ -74,20 +87,21 @@ class ImageGallery extends React.Component {
     if (!isLoading) return null;
 
     return (
-      <View style={{ paddingTop: 32, paddingBottom: 64 }}>
+      <View style={{ paddingVertical: 24 }}>
         <ActivityIndicator size="large" color={color.red} />
       </View>
     );
   };
 
   getItemLayout = (data, index) => ({
-    length: ThumbnailConfig.width,
-    offset: ThumbnailConfig.width * index,
+    length: THUMBNAIL_WIDTH,
+    offset: THUMBNAIL_WIDTH * index,
     index,
   });
 
   render() {
-    const { data, error, isRefreshing } = this.state;
+    const { error, isRefreshing } = this.state;
+    const { getRef } = this.props;
 
     if (error) {
       return (
@@ -106,12 +120,15 @@ class ImageGallery extends React.Component {
 
     return (
       <FlatList
-        data={data}
-        extraData={data.length}
-        renderItem={({ item }) => <Thumbnail url={item.urls.thumb} />}
-        keyExtractor={(item, index) => index}
+        ref={getRef}
+        data={this.dataArray}
+        renderItem={this.renderItem}
+        keyExtractor={(item) => item.id}
         getItemLayout={this.getItemLayout}
-        numColumns={4}
+        maxToRenderPerBatch={BATCH_SIZE}
+        windowSize={BATCH_SIZE}
+        numColumns={NUM_COLUMNS}
+        removeClippedSubviews
         refreshControl={(
           <RefreshControl
             refreshing={isRefreshing}
@@ -120,12 +137,20 @@ class ImageGallery extends React.Component {
           />
         )}
         onEndReached={this.handleLoadMore}
-        onEndReachedThreshold={50}
+        onEndReachedThreshold={2}
         ListFooterComponent={this.renderFooter}
         ListEmptyComponent={this.renderEmptyComponent}
       />
     );
   }
 }
+
+ImageGallery.propTypes = {
+  getRef: PropTypes.func,
+};
+
+ImageGallery.defaultProps = {
+  getRef: () => null,
+};
 
 export default ImageGallery;

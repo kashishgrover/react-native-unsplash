@@ -20,6 +20,7 @@
     "react-native-splash-screen": "3.2.0",
     "react-native-vector-icons": "^6.3.0",
     "react-navigation": "3.3.0",
+    "react-navigation-fluid-transitions": "^0.3.1",
     "styled-components": "3.2.6"
   },
   "devDependencies": {

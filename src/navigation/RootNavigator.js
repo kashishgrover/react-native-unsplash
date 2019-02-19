@@ -4,7 +4,7 @@ import SinglePhotoScreen from '../screens/SinglePhotoScreen/SinglePhotoScreen';
 
 export default createStackNavigator(
   {
-    BottomTabNavigator: {
+    Home: {
       screen: BottomTabNavigator,
     },
     SinglePhotoScreen: {
