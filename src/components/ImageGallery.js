@@ -72,16 +72,10 @@ class ImageGallery extends React.Component {
 
   renderItem = ({ item, index }) => {
     const columnIndex = index % 4;
-
     return (
-      <View
-        style={{
-          paddingLeft: columnIndex > 0 ? 8 : 0,
-        }}
-      >
+      <View style={{ paddingLeft: columnIndex > 0 ? 8 : 0 }}>
         <Thumbnail
-          url={item.urls.thumb}
-          backgroundColor={item.color}
+          photo={item}
           width={THUMBNAIL_WIDTH}
         />
       </View>
@@ -143,7 +137,7 @@ class ImageGallery extends React.Component {
         )}
         columnWrapperStyle={{ marginBottom: 8 }}
         onEndReached={this.handleLoadMore}
-        onEndReachedThreshold={2}
+        onEndReachedThreshold={1}
         ListFooterComponent={this.renderFooter}
         ListEmptyComponent={this.renderEmptyComponent}
       />
