@@ -11,7 +11,4 @@ export default createStackNavigator(
       screen: SinglePhotoScreen,
     },
   },
-  {
-    headerMode: 'none',
-  },
 );

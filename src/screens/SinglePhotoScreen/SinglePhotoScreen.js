@@ -1,24 +1,23 @@
 import React from 'react';
-import styled from 'styled-components/native';
-
-const Container = styled.View`
-  flex: 1;
-  align-items: center;
-  justify-content: center;
-`;
-
-const Text = styled.Text`
-
-`;
+import { View, Text } from 'react-native';
+import styles from '../styles';
+import color from '../../theme/color';
 
 class SinglePhotoScreen extends React.Component {
+  static navigationOptions = () => ({
+    headerTintColor: color.white,
+    headerStyle: {
+      backgroundColor: color.greyDarkest,
+    },
+  })
+
   state = {};
 
   render() {
     return (
-      <Container>
+      <View style={styles.container}>
         <Text>Single Photo Screen</Text>
-      </Container>
+      </View>
     );
   }
 }

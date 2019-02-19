@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
-import { createBottomTabNavigator, createAppContainer } from 'react-navigation';
+import { createBottomTabNavigator } from 'react-navigation';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import HomeScreen from '../screens/HomeScreen/HomeScreen';
 import ProfileScreen from '../screens/ProfileScreen/ProfileScreen';
@@ -46,4 +46,10 @@ const TabNavigator = createBottomTabNavigator(
   },
 );
 
-export default createAppContainer(TabNavigator);
+TabNavigator.navigationOptions = () => ({
+  headerStyle: {
+    backgroundColor: color.greyDarkest,
+  },
+});
+
+export default TabNavigator;

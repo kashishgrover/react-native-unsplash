@@ -5,8 +5,8 @@ import RootNavigator from './navigation/RootNavigator';
 StatusBar.setBarStyle('light-content');
 
 TouchableOpacity.defaultProps = {
-  activeOpacity: 0.8,
   ...TouchableOpacity.defaultProps,
+  activeOpacity: 0.8,
 };
 
 export default createAppContainer(RootNavigator);

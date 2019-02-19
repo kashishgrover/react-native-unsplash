@@ -1,24 +1,15 @@
 import React from 'react';
-import styled from 'styled-components/native';
-
-const Container = styled.View`
-  flex: 1;
-  align-items: center;
-  justify-content: center;
-`;
-
-const Text = styled.Text`
-
-`;
+import { View, Text } from 'react-native';
+import styles from '../styles';
 
 class ProfileScreen extends React.Component {
   state = {};
 
   render() {
     return (
-      <Container>
+      <View style={styles.container}>
         <Text>Profile Screen</Text>
-      </Container>
+      </View>
     );
   }
 }
