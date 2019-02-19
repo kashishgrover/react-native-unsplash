@@ -9,9 +9,9 @@ import {
   RefreshControl,
   Dimensions,
 } from 'react-native';
-import config from '../../config';
-import color from '../../theme/color';
-import Thumbnail from '../Thumbnail/Thumbnail';
+import config from '../config';
+import color from '../theme/color';
+import Thumbnail from './Thumbnail';
 
 const BATCH_SIZE = 28;
 const NUM_COLUMNS = 4;
@@ -88,7 +88,7 @@ class ImageGallery extends React.Component {
 
     return (
       <View style={{ paddingVertical: 24 }}>
-        <ActivityIndicator size="large" color={color.red} />
+        <ActivityIndicator size="large" color={color.blue} />
       </View>
     );
   };
@@ -112,7 +112,7 @@ class ImageGallery extends React.Component {
           <Button
             onPress={this.makeRemoteRequest}
             title="Try Again"
-            color={color.red}
+            color={color.blue}
           />
         </View>
       );
@@ -133,7 +133,7 @@ class ImageGallery extends React.Component {
           <RefreshControl
             refreshing={isRefreshing}
             onRefresh={this.handleRefresh}
-            tintColor={color.red}
+            tintColor={color.blue}
           />
         )}
         onEndReached={this.handleLoadMore}

@@ -1,6 +1,6 @@
 import { createStackNavigator } from 'react-navigation';
 import BottomTabNavigator from './BottomTabNavigator';
-import SinglePhotoScreen from '../screens/SinglePhotoScreen/SinglePhotoScreen';
+import SinglePhotoScreen from '../screens/SinglePhotoScreen';
 
 export default createStackNavigator(
   {

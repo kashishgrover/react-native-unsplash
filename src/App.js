@@ -2,7 +2,7 @@ import { createAppContainer } from 'react-navigation';
 import { StatusBar, TouchableOpacity } from 'react-native';
 import RootNavigator from './navigation/RootNavigator';
 
-StatusBar.setBarStyle('light-content');
+StatusBar.setBarStyle('dark-content');
 
 TouchableOpacity.defaultProps = {
   ...TouchableOpacity.defaultProps,

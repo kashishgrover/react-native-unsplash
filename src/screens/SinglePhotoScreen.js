@@ -1,13 +1,13 @@
 import React from 'react';
 import { View, Text } from 'react-native';
-import styles from '../styles';
-import color from '../../theme/color';
+import styles from './styles';
+import color from '../theme/color';
 
 class SinglePhotoScreen extends React.Component {
   static navigationOptions = () => ({
-    headerTintColor: color.white,
+    headerTintColor: color.blue,
     headerStyle: {
-      backgroundColor: color.greyDarkest,
+      backgroundColor: color.white,
     },
   })
 
