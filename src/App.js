@@ -1,34 +1,12 @@
-import React from 'react';
-import { FlatList, View, Dimensions } from 'react-native';
+import { createAppContainer } from 'react-navigation';
+import { StatusBar, TouchableOpacity } from 'react-native';
+import RootNavigator from './navigation/RootNavigator';
 
-const SQUARE_WIDTH = Dimensions.get('window').width / 4 - 1;
+StatusBar.setBarStyle('light-content');
 
-const DATA = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
+TouchableOpacity.defaultProps = {
+  activeOpacity: 0.8,
+  ...TouchableOpacity.defaultProps,
+};
 
-class App extends React.Component {
-  state = {};
-
-  renderItem = () => (
-    <View
-      style={{
-        width: SQUARE_WIDTH,
-        height: SQUARE_WIDTH,
-        backgroundColor: 'white',
-        borderWidth: 1,
-      }}
-    />
-  )
-
-  render() {
-    return (
-      <FlatList
-        data={DATA}
-        renderItem={this.renderItem}
-        keyExtractor={(item) => item}
-        numColumns={4}
-      />
-    );
-  }
-}
-
-export default App;
+export default createAppContainer(RootNavigator);
