@@ -1,36 +1,34 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { FlatList, View, Dimensions } from 'react-native';
+
+const SQUARE_WIDTH = Dimensions.get('window').width / 4 - 1;
+
+const DATA = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
 
 class App extends React.Component {
   state = {};
 
+  renderItem = () => (
+    <View
+      style={{
+        width: SQUARE_WIDTH,
+        height: SQUARE_WIDTH,
+        backgroundColor: 'white',
+        borderWidth: 1,
+      }}
+    />
+  )
+
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>Welcome to React Native!</Text>
-        <Text style={styles.instructions}>To get started, edit App.js</Text>
-      </View>
+      <FlatList
+        data={DATA}
+        renderItem={this.renderItem}
+        keyExtractor={(item) => item}
+        numColumns={4}
+      />
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-});
 
 export default App;
