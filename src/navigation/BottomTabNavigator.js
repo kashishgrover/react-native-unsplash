@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import { createBottomTabNavigator } from 'react-navigation';
+import { View, Text } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import HomeScreen from '../screens/HomeScreen/HomeScreen';
 import ProfileScreen from '../screens/ProfileScreen/ProfileScreen';
@@ -50,6 +51,13 @@ TabNavigator.navigationOptions = () => ({
   headerStyle: {
     backgroundColor: color.greyDarkest,
   },
+  headerTitle: (
+    <View style={{ width: '100%', paddingLeft: 16 }}>
+      <Text style={{ color: color.white, fontSize: 24 }}>
+        React Splash
+      </Text>
+    </View>
+  ),
 });
 
 export default TabNavigator;
