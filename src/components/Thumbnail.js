@@ -7,11 +7,7 @@ import ImageLoad from './ImageLoad';
 
 class Thumbnail extends React.PureComponent {
   render() {
-    const {
-      navigation,
-      photo,
-      width,
-    } = this.props;
+    const { navigation, photo, width } = this.props;
 
     return (
       <TouchableHighlight

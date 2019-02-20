@@ -50,10 +50,7 @@ class ImageGallery extends React.Component {
         isRefreshing: false,
       });
     } catch (error) {
-      this.setState({
-        error,
-        isLoading: false,
-      });
+      this.setState({ error, isLoading: false });
     }
   };
 
@@ -73,7 +70,7 @@ class ImageGallery extends React.Component {
   renderItem = ({ item, index }) => {
     const columnIndex = index % 4;
     return (
-      <View style={{ paddingLeft: columnIndex > 0 ? 8 : 0 }}>
+      <View style={{ marginLeft: columnIndex > 0 ? 8 : 0 }}>
         <Thumbnail
           photo={item}
           width={THUMBNAIL_WIDTH}
@@ -88,9 +85,11 @@ class ImageGallery extends React.Component {
     if (!isLoading) return null;
 
     return (
-      <View style={{ paddingVertical: 24 }}>
-        <ActivityIndicator size="large" color={color.blue} />
-      </View>
+      <ActivityIndicator
+        style={{ marginVertical: 24 }}
+        size="large"
+        color={color.blue}
+      />
     );
   };
 
@@ -105,9 +104,9 @@ class ImageGallery extends React.Component {
 
     if (error) {
       return (
-        <View style={{ alignItems: 'center', flex: 1, justifyContent: 'center' }}>
-          <Text style={{ fontSize: 16, color: color.white }}>
-            Yikes, something went wrong!
+        <View>
+          <Text style={{ fontSize: 16, color: color.greyDark }}>
+            {'Yikes, something went wrong! :o'}
           </Text>
           <Button
             onPress={this.makeRemoteRequest}

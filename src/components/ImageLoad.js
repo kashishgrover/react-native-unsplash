@@ -14,7 +14,7 @@ class ImageLoad extends React.Component {
     const { placeholderOpacity } = this.state;
     Animated.timing(placeholderOpacity, {
       toValue: 0,
-      duration: 500,
+      duration: 300,
       useNativeDriver: true,
     }).start();
   }

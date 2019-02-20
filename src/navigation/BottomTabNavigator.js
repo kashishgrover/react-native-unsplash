@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs';
-import { View, Text, StyleSheet } from 'react-native';
+import { Text, StyleSheet } from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import PhotosScreen from '../screens/PhotosScreen';
 import AlbumsScreen from '../screens/AlbumsScreen';
@@ -56,23 +56,19 @@ TabNavigator.navigationOptions = () => ({
     backgroundColor: color.white,
   },
   headerTitle: (
-    <View style={styles.titleContainer}>
-      <Text style={styles.title}>
-        React Splash
-      </Text>
-    </View>
+    <Text style={styles.title}>
+      React Splash
+    </Text>
   ),
 });
 
 const styles = StyleSheet.create({
-  titleContainer: {
-    width: '100%',
-    paddingLeft: 8,
-  },
   title: {
     color: color.blue,
     fontSize: 22,
     fontFamily: 'SFProDisplay-Medium',
+    width: '100%',
+    marginLeft: 16,
   },
 });
 
