@@ -22,7 +22,7 @@ class SinglePhotoScreen extends React.Component {
       <ScrollView
         maximumZoomScale={5}
         minimumZoomScale={1}
-        contentContainerStyle={{ flex: 1 }}
+        contentContainerStyle={{ flex: 1, backgroundColor: photo.color }}
       >
         <ImageLoad
           style={{ width: '100%', height: '100%' }}
