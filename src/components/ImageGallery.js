@@ -12,7 +12,7 @@ import config from '../config';
 import color from '../theme/color';
 import Thumbnail from './Thumbnail';
 
-const BATCH_SIZE = 28;
+const BATCH_SIZE = 32;
 const NUM_COLUMNS = 4;
 const THUMBNAIL_WIDTH = Dimensions.get('window').width / NUM_COLUMNS - 6;
 

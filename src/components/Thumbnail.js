@@ -6,13 +6,21 @@ import color from '../theme/color';
 import ImageLoad from './ImageLoad';
 
 class Thumbnail extends React.PureComponent {
+  handleNavigate = () => {
+    const { navigation, photo } = this.props;
+    navigation.navigate('SinglePhotoScreen', {
+      photo,
+      transition: 'slideFromRight',
+    });
+  }
+
   render() {
-    const { navigation, photo, width } = this.props;
+    const { photo, width } = this.props;
 
     return (
       <TouchableHighlight
         style={{ width, height: width }}
-        onPress={() => navigation.navigate('SinglePhotoScreen', { photo })}
+        onPress={this.handleNavigate}
         underlayColor={color.blueDark}
       >
         <ImageLoad

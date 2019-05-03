@@ -46,7 +46,7 @@ const OpacityAnimation = (index, position) => {
 
 export default () => ({
   transitionSpec: {
-    duration: 1000,
+    duration: 500,
     easing: Easing.out(Easing.poly(6)),
     timing: Animated.timing,
     useNativeDriver: true,
