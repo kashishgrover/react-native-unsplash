@@ -1,4 +1,4 @@
-# React Splash - An Unsplash Image Gallery 🖼
+# React Native Unplash - An Unsplash Image Gallery 🖼
 
 An infinite list of Unsplash images built using React Native.
 
@@ -9,4 +9,4 @@ An infinite list of Unsplash images built using React Native.
 - `yarn`
 - `yarn start`
 - `yarn run ios`
-
+- `yarn run android`
