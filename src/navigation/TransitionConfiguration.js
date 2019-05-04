@@ -14,7 +14,7 @@ import { Animated, Easing } from 'react-native';
 const SlideFromRightAnimation = (index, position, width) => {
   const translateX = position.interpolate({
     inputRange: [index - 1, index],
-    outputRange: [width / 2, 0],
+    outputRange: [width, 0],
   });
   const slideFromRight = { transform: [{ translateX }] };
   return slideFromRight;
