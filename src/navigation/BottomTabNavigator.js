@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import React from 'react';
 import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs';
 import { Text, StyleSheet } from 'react-native';
@@ -14,32 +13,52 @@ const TabNavigator = createMaterialBottomTabNavigator(
     Photos: {
       screen: PhotosScreen,
       navigationOptions: {
+        // eslint-disable-next-line react/prop-types
         tabBarIcon: ({ tintColor }) => (
-          <MaterialIcons name="photo" size={24} color={tintColor} />
+          <MaterialIcons
+            name="photo"
+            size={24}
+            color={tintColor}
+          />
         ),
       },
     },
     Albums: {
       screen: AlbumsScreen,
       navigationOptions: {
+        // eslint-disable-next-line react/prop-types
         tabBarIcon: ({ tintColor }) => (
-          <MaterialIcons name="photo-library" size={24} color={tintColor} />
+          <MaterialIcons
+            name="photo-library"
+            size={24}
+            color={tintColor}
+          />
         ),
       },
     },
     Assistant: {
       screen: AssistantScreen,
       navigationOptions: {
+        // eslint-disable-next-line react/prop-types
         tabBarIcon: ({ tintColor }) => (
-          <MaterialIcons name="assistant" size={24} color={tintColor} />
+          <MaterialIcons
+            name="assistant"
+            size={24}
+            color={tintColor}
+          />
         ),
       },
     },
     Sharing: {
       screen: SharingScreen,
       navigationOptions: {
+        // eslint-disable-next-line react/prop-types
         tabBarIcon: ({ tintColor }) => (
-          <MaterialIcons name="people" size={24} color={tintColor} />
+          <MaterialIcons
+            name="people"
+            size={24}
+            color={tintColor}
+          />
         ),
       },
     },

@@ -10,4 +10,7 @@ TouchableOpacity.defaultProps = {
   activeOpacity: 0.8,
 };
 
+// eslint-disable-next-line no-console
+console.disableYellowBox = true;
+
 export default createAppContainer(RootNavigator);

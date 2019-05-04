@@ -8,11 +8,11 @@ import {
   RefreshControl,
   Dimensions,
 } from 'react-native';
-import config from '../config';
 import color from '../theme/color';
 import Thumbnail from './Thumbnail';
+import unsplashService from '../services/unsplashService';
 
-const BATCH_SIZE = 32;
+const BATCH_SIZE = 24;
 const NUM_COLUMNS = 4;
 const THUMBNAIL_WIDTH = Dimensions.get('window').width / NUM_COLUMNS - 6;
 
@@ -36,22 +36,22 @@ class ImageGallery extends React.Component {
 
   makeRemoteRequest = async () => {
     const { page } = this.state;
-    const url = `${config.baseUrl}?page=${page}&per_page=${BATCH_SIZE}`;
 
     this.setState({ isLoading: true });
 
-    try {
-      const res = await fetch(url);
-      const data = await res.json();
-      this.dataArray = page === 1 ? data : [...this.dataArray, ...data];
-      this.setState({
-        error: data.error || null,
-        isLoading: false,
-        isRefreshing: false,
+    unsplashService.listPhotos(page, BATCH_SIZE)
+      .then(unsplashService.toJson)
+      .then((data) => {
+        this.dataArray = page === 1 ? data : [...this.dataArray, ...data];
+        this.setState({
+          error: data.error || null,
+          isLoading: false,
+          isRefreshing: false,
+        });
+      })
+      .catch((error) => {
+        this.setState({ error, isLoading: false });
       });
-    } catch (error) {
-      this.setState({ error, isLoading: false });
-    }
   };
 
   handleLoadMore = () => {

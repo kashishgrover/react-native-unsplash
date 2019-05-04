@@ -12,8 +12,6 @@ class SinglePhotoScreen extends React.Component {
     },
   })
 
-  state = {};
-
   render() {
     const { navigation } = this.props;
     const { photo } = navigation.state.params;

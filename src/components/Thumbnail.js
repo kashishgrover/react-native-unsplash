@@ -10,7 +10,7 @@ class Thumbnail extends React.PureComponent {
     const { navigation, photo } = this.props;
     navigation.navigate('SinglePhotoScreen', {
       photo,
-      transition: 'slideFromRight',
+      transition: 'scaleOut',
     });
   }
 
