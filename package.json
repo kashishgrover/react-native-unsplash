@@ -14,7 +14,7 @@
   "dependencies": {
     "prop-types": "15.7.2",
     "react": "16.8.3",
-    "react-native": "0.59.5",
+    "react-native": "0.61.2",
     "react-native-fast-image": "5.4.0",
     "react-native-gesture-handler": "1.2.1",
     "react-native-paper": "2.15.2",
