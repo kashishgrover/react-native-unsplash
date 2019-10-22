@@ -8,15 +8,21 @@ import {
   RefreshControl,
   Dimensions,
 } from 'react-native';
+import PropTypes from 'prop-types';
+import { withNavigation } from 'react-navigation';
 import color from '../theme/color';
 import Thumbnail from './Thumbnail';
 import unsplashService from '../services/unsplashService';
 
-const BATCH_SIZE = 24;
+const BATCH_SIZE = 28;
 const NUM_COLUMNS = 4;
 const THUMBNAIL_WIDTH = Dimensions.get('window').width / NUM_COLUMNS - 6;
 
 class ImageGallery extends React.Component {
+  static propTypes = {
+    navigation: PropTypes.object.isRequired,
+  };
+
   constructor(props) {
     super(props);
 
@@ -25,24 +31,34 @@ class ImageGallery extends React.Component {
       page: 1,
       error: null,
       isRefreshing: false,
+      photos: [],
     };
-
-    this.dataArray = [];
   }
 
   componentDidMount() {
     this.makeRemoteRequest();
   }
 
-  makeRemoteRequest = async () => {
-    const { page } = this.state;
+  componentDidUpdate() {
+    const { navigation } = this.props;
+    navigation.addListener('willFocus', this.resetMainScreen);
+  }
 
+  resetMainScreen = () => {
+    this.setState({ page: 1, photos: [], isLoading: true }, () => {
+      this.makeRemoteRequest();
+    });
+  };
+
+  makeRemoteRequest = async () => {
+    const { page, photos } = this.state;
     this.setState({ isLoading: true });
 
-    unsplashService.listPhotos(page, BATCH_SIZE)
+    unsplashService
+      .listPhotos(page, BATCH_SIZE, 'latest')
       .then(unsplashService.toJson)
       .then((data) => {
-        this.dataArray = page === 1 ? data : [...this.dataArray, ...data];
+        this.setState({ photos: page === 1 ? data : [...photos, ...data] });
         this.setState({
           error: data.error || null,
           isLoading: false,
@@ -62,7 +78,7 @@ class ImageGallery extends React.Component {
   };
 
   handleRefresh = () => {
-    this.setState({ page: 1, isRefreshing: true }, () => {
+    this.setState({ page: 1, isRefreshing: true, photos: [] }, () => {
       this.makeRemoteRequest();
     });
   };
@@ -71,26 +87,17 @@ class ImageGallery extends React.Component {
     const columnIndex = index % 4;
     return (
       <View style={{ marginLeft: columnIndex > 0 ? 8 : 0 }}>
-        <Thumbnail
-          photo={item}
-          width={THUMBNAIL_WIDTH}
-        />
+        <Thumbnail photo={item} width={THUMBNAIL_WIDTH} />
       </View>
     );
-  }
+  };
 
   renderFooter = () => {
     const { isLoading } = this.state;
 
     if (!isLoading) return null;
 
-    return (
-      <ActivityIndicator
-        style={{ marginVertical: 24 }}
-        size="large"
-        color={color.blue}
-      />
-    );
+    return <ActivityIndicator style={{ marginVertical: 24 }} size="large" color={color.blue} />;
   };
 
   getItemLayout = (data, index) => ({
@@ -100,26 +107,20 @@ class ImageGallery extends React.Component {
   });
 
   render() {
-    const { error, isRefreshing } = this.state;
-
+    const { error, isRefreshing, photos } = this.state;
     if (error) {
       return (
         <View>
           <Text style={{ fontSize: 16, color: color.greyDark }}>
             {'Yikes, something went wrong! :o'}
           </Text>
-          <Button
-            onPress={this.makeRemoteRequest}
-            title="Try Again"
-            color={color.blue}
-          />
+          <Button onPress={this.makeRemoteRequest} title="Try Again" color={color.blue} />
         </View>
       );
     }
-
     return (
       <FlatList
-        data={this.dataArray}
+        data={photos}
         renderItem={this.renderItem}
         keyExtractor={(item) => item.id}
         getItemLayout={this.getItemLayout}
@@ -130,13 +131,13 @@ class ImageGallery extends React.Component {
         refreshControl={(
           <RefreshControl
             refreshing={isRefreshing}
-            onRefresh={this.handleRefresh}
+            onRefresh={this.resetMainScreen}
             tintColor={color.blue}
           />
-        )}
+)}
         columnWrapperStyle={{ marginBottom: 8 }}
         onEndReached={this.handleLoadMore}
-        onEndReachedThreshold={1}
+        onEndReachedThreshold={0.1}
         ListFooterComponent={this.renderFooter}
         ListEmptyComponent={this.renderEmptyComponent}
       />
@@ -144,4 +145,4 @@ class ImageGallery extends React.Component {
   }
 }
 
-export default ImageGallery;
+export default withNavigation(ImageGallery);
