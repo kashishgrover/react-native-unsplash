@@ -8,8 +8,9 @@
     "ios": "react-native run-ios",
     "android": "react-native run-android",
     "commit": "node node_modules/git-cz/dist/cli.js",
-    "test": "jest",
-    "lint": "eslint ."
+    "test": "echo \"TODO: add tests\"",
+    "lint": "eslint .",
+    "prepare": "husky install"
   },
   "dependencies": {
     "prop-types": "15.7.2",
@@ -24,9 +25,9 @@
   },
   "devDependencies": {
     "@babel/core": "7.14.6",
-    "@babel/runtime": "7.14.6",
     "@babel/eslint-parser": "7.14.7",
     "@babel/preset-env": "7.14.7",
+    "@babel/runtime": "7.14.6",
     "eslint": "7.30.0",
     "eslint-config-airbnb": "18.2.1",
     "eslint-plugin-import": "2.23.4",
@@ -35,24 +36,9 @@
     "eslint-plugin-react-hooks": "4.2.0",
     "eslint-plugin-react-native-globals": "0.1.2",
     "git-cz": "4.7.6",
-    "husky": "7.0.1",
+    "husky": "^7.0.0",
     "lint-staged": "11.0.0",
     "metro-react-native-babel-preset": "0.64.0",
     "react-test-renderer": "17.0.1"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "*.js": [
-      "eslint"
-    ]
-  },
-  "rnpm": {
-    "assets": [
-      "./src/theme/fonts"
-    ]
   }
 }
