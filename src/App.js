@@ -1,16 +1,16 @@
-import { createAppContainer } from 'react-navigation';
-import { StatusBar, TouchableOpacity } from 'react-native';
-import RootNavigator from './navigation/RootNavigator';
+import "react-native-gesture-handler";
+import { Platform, StatusBar, TouchableOpacity } from "react-native";
+import RootNavigator from "./navigation/RootNavigator";
 
-StatusBar.setBackgroundColor('white');
-StatusBar.setBarStyle('dark-content');
+if (Platform.OS === "android") {
+  StatusBar.setBackgroundColor("white");
+}
+
+StatusBar.setBarStyle("dark-content");
 
 TouchableOpacity.defaultProps = {
   ...TouchableOpacity.defaultProps,
   activeOpacity: 0.8,
 };
 
-// eslint-disable-next-line no-console
-console.disableYellowBox = true;
-
-export default createAppContainer(RootNavigator);
+export default RootNavigator;

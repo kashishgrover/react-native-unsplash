@@ -57,3 +57,15 @@ buck-out/
 
 # Others
 *.log
+
+# Yarn v2
+.yarn/*
+!.yarn/patches
+!.yarn/releases
+!.yarn/plugins
+!.yarn/sdks
+!.yarn/versions
+.pnp.*
+
+# CocoaPods
+/ios/Pods/
