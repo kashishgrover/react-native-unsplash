@@ -1,8 +1,8 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { ScrollView } from 'react-native';
-import color from '../theme/color';
-import ImageLoad from '../components/ImageLoad';
+import React from "react";
+import PropTypes from "prop-types";
+import { ScrollView } from "react-native";
+import color from "../theme/color";
+import ImageLoad from "../components/ImageLoad";
 
 class SinglePhotoScreen extends React.Component {
   static navigationOptions = () => ({
@@ -10,11 +10,14 @@ class SinglePhotoScreen extends React.Component {
     headerStyle: {
       backgroundColor: color.white,
     },
-  })
+  });
 
   render() {
-    const { navigation } = this.props;
-    const { photo } = navigation.state.params;
+    const {
+      route: {
+        params: { photo },
+      },
+    } = this.props;
 
     return (
       <ScrollView
@@ -24,7 +27,7 @@ class SinglePhotoScreen extends React.Component {
         contentContainerStyle={{ flex: 1 }}
       >
         <ImageLoad
-          style={{ width: '100%', height: '100%' }}
+          style={{ width: "100%", height: "100%" }}
           source={{ uri: photo.urls.full }}
           resizeMode="contain"
           placeholderColor={photo.color}

@@ -1,18 +1,19 @@
-import { createStackNavigator } from 'react-navigation';
-import BottomTabNavigator from './BottomTabNavigator';
-import SinglePhotoScreen from '../screens/SinglePhotoScreen';
-import TransitionConfiguration from './TransitionConfiguration';
+// import TransitionConfiguration from './TransitionConfiguration';
+import React from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+import BottomTabNavigator from "./BottomTabNavigator";
+import SinglePhotoScreen from "../screens/SinglePhotoScreen";
 
-export default createStackNavigator(
-  {
-    Home: {
-      screen: BottomTabNavigator,
-    },
-    SinglePhotoScreen: {
-      screen: SinglePhotoScreen,
-    },
-  },
-  {
-    transitionConfig: TransitionConfiguration,
-  },
-);
+const Stack = createStackNavigator();
+
+export default function RootNavigator() {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Home" component={BottomTabNavigator} />
+        <Stack.Screen name="SinglePhotoScreen" component={SinglePhotoScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+}
